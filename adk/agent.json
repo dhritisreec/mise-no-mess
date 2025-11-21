@@ -1,0 +1,29 @@
+{
+  "name": "Mise No Mess - Indian Restaurant Menu Analyzer",
+  "description": "Analyzes Indian restaurant menus to find kitchen inefficiencies, overloaded stations, bottlenecks, and generates operational reports.",
+  "model": "gemini-2.5-flash",
+  "system_instruction": "You analyze Indian restaurant menus (Butter Chicken, Paneer Tikka, Veg Biryani, Dal Makhani, Masala Dosa, etc). When the user uploads a menu or pastes text, you MUST call parse_menu → analyze_conflicts → generate_report in order. Always return both structured JSON and a human-readable explanation.",
+  "tools": [
+    {
+      "name": "parse_menu",
+      "description": "Parse raw menu text into structured items with Indian stations.",
+      "type": "openapi",
+      "method": "POST",
+      "url": "https://mise-no-mess-api-abc123.a.run.app/tools/parse_menu"
+    },
+    {
+      "name": "analyze_conflicts",
+      "description": "Analyze station load, bottlenecks, and inefficiencies.",
+      "type": "openapi",
+      "method": "POST",
+      "url": "https://mise-no-mess-api-abc123.a.run.app/tools/analyze_conflicts"
+    },
+    {
+      "name": "generate_report",
+      "description": "Generate final operational report.",
+      "type": "openapi",
+      "method": "POST",
+      "url": "https://mise-no-mess-api-abc123.a.run.app/tools/generate_report"
+    }
+  ]
+}
